@@ -1,1 +1,11 @@
-（検証ステータス:未着手）
+[KNOWLEDGES]
+https://org.sharepoint.com/sites/.../merged.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_4.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_5.md
+
+[HISTORY]
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_1.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_2.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_merged.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_3.md
+https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_merged.md
