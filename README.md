@@ -53,10 +53,10 @@ copilot-knowledge-management/
 ├ Project_MANIFEST.template.txt
 ├ LICENSE
 ├ prompts/
-│  ├ ja/
+│  ├ jp/
 │  └ en/
 └ docs/
-   ├ ja/
+   ├ jp/
    └ en/
 ```
 
