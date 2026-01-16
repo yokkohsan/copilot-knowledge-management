@@ -1,1 +1,54 @@
 (Validation status: not started)
+
+[Purpose]
+
+This prompt is used to preserve the latest primary artifacts
+before the chat reaches its limit.
+
+---
+
+Use only the information available in this chat.
+Do not add new discussion or analysis.
+
+[Important constraints]
+- Do not add new content
+- Do not guess or infer missing information
+- Preserve original wording
+- Treat primary artifacts as authoritative
+- Do not delete or compress information
+- Accuracy is the highest priority
+
+[Output policy]
+- Output must be Markdown
+- Wrap the entire output in a single outer Markdown code block
+- If artifacts include Markdown or program code, nest them properly
+- Use sufficiently long backticks to avoid conflicts
+
+[Output format]
+
+# Knowledge Backup
+
+## 0. Purpose of this backup
+- Describe why this backup is being created
+
+## 1. Purpose of the conversation
+- Describe the conversation goal
+
+## 2. Assumptions and constraints
+- List valid assumptions and constraints
+
+## 3. Decisions and conclusions
+- List valid decisions and conclusions
+
+## 4. Open issues
+- List unresolved issues, or write "none"
+
+## 5. Referenced materials
+- List referenced materials as far as known
+
+## 6. Primary artifacts (no summarizing or editing)
+- Include only primary artifacts actually created or edited
+- Do not include backup documents or merged files
+- Write artifacts exactly as-is
+- Use "Artifact 1", "Artifact 2", etc.
+- If none, write "none"

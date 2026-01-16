@@ -1,1 +1,58 @@
 (Validation status: not started)
+
+[How to use]
+
+1) Paste the entire [KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top.
+2) Ensure referenced files are attached and readable.
+
+---
+
+This prompt is used only for the **assumption restoration phase**.
+Do not start new discussion here.
+
+[Important constraints]
+- During restoration, use only attached information
+- Do not add new content
+- Do not infer or generalize
+- Do not reprint primary artifacts
+- Do not modify restored assumptions
+- After restoration is complete, normal discussion may resume freely
+  and other sources (Teams, OneDrive, SharePoint, email, etc.) may be referenced
+
+[Output policy]
+- Output must have two parts (no Markdown code blocks):
+  1) Restoration log
+  2) Restored assumptions
+
+[Output format]
+
+# Reference Log (Restore)
+
+## 1. Files successfully referenced
+- List merged / summary files
+
+## 2. Files not referenced (if any)
+- File:
+  - URL:
+  - Reason:
+
+## 3. Restoration decision notes
+- Base file:
+- Applied summaries:
+- Conflict handling:
+
+---
+
+# Restored Assumptions
+
+## 1. Purpose of the conversation
+## 2. Assumptions and constraints
+## 3. Decisions and conclusions
+## 4. Open issues
+## 5. Referenced materials
+## 6. Artifact list (metadata only)
+- List artifact name, type, and role only
+- Do not reprint artifact content
+
+After this output, restoration is complete.
+Continue with normal discussion.

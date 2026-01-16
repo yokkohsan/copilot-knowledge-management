@@ -1,1 +1,63 @@
 (Validation status: not started)
+
+[How to use]
+
+1) Paste the entire [KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top of this prompt.
+2) Ensure the referenced files are attached and readable.
+
+---
+
+You are merging knowledge for the same project.
+Use only the files listed in [KNOWLEDGES].
+
+No new discussion or analysis is needed.
+
+[Important constraints]
+- Do not add new content
+- Do not guess or infer
+- Preserve original wording
+- Treat primary artifacts as authoritative
+- If merged.md is available, treat it as the base
+- If not, prioritize newer summary files
+- Do not compress or delete information
+
+[Output policy]
+- Output must have two sections:
+  1) Verification log (outside code blocks)
+  2) merged.md content (inside one outer Markdown code block)
+- Use sufficiently long backticks
+- Close the outer block exactly once
+
+[Output format]
+
+# Verification Log (Merge)
+
+## 1. Referenced files
+- List referenced merged / summary files
+
+## 2. Missing files (if any)
+- File name:
+  - URL:
+  - Reason:
+
+## 3. Merge decision notes
+- Base file used:
+- Summaries applied:
+- Conflict resolution rules:
+- Included / excluded artifacts and reasons:
+
+---
+
+# Knowledge Merge
+
+## 0. Position of this merged file
+- This merged.md is the authoritative file for restore
+
+## 1. Purpose of the conversation
+## 2. Assumptions and constraints
+## 3. Decisions and conclusions
+## 4. Open issues
+## 5. Referenced materials
+## 6. Primary artifacts (no summarizing or editing)
+
+(End)
