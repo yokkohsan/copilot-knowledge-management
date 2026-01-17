@@ -1,13 +1,8 @@
-(Validation status: not started)
-
 # Copilot Knowledge Management – Operation Guide (English)
 
-This document explains the **full operational model, steps, and naming rules**
-for running Copilot Knowledge Management in practice.
+This document describes the **complete operational model, steps, and naming rules** for running Copilot Knowledge Management in practice.
 
-Microsoft Copilot has multiple UIs (Web, Teams, desktop apps),
-but this workflow is designed so that **the same assumptions and artifacts
-can be restored and reused reliably, regardless of the UI**.
+Microsoft Copilot has multiple UIs (Web, Teams, desktop apps), but this workflow is designed so that **the same assumptions and artifacts can be restored and reused reliably, regardless of the UI**.
 
 ---
 
@@ -22,8 +17,7 @@ can be restored and reused reliably, regardless of the UI**.
 
 ## Recommended Directory Structure
 
-The following is an example close to **real-world operation**,
-where assumptions and primary artifacts grow over time.
+The following example reflects **real-world operation**, where assumptions and artifacts grow over time.
 
 ```text
 Copilot_Knowledge/
@@ -61,12 +55,11 @@ Copilot_Knowledge/
 
 - `merged.md`
   - Located directly under each project directory
-  - The **only authoritative file** that includes primary artifacts
-  - Assumptions and decisions are included only as supporting context
+  - The authoritative file that includes assumptions and artifacts
 
 ---
 
-### summary Files (Snapshots / Supporting Context)
+### summary Files (Supporting Snapshots)
 
 - `ProjectX_YYYYMMDD_summary_N.md`
   - YYYYMMDD: creation date
@@ -84,94 +77,133 @@ Copilot_Knowledge/
 
 ---
 
-## MANIFEST Concept
+## Why We Do Not Use Notebooks or Folder References
 
-- The MANIFEST explicitly declares **what Copilot is allowed to read**
-- It prevents Copilot from misinterpreting which artifact is authoritative
-- Any file not listed in the MANIFEST must not be treated as an assumption
+Copilot Notebooks and folder-based references were evaluated, but they did not work well for long-term knowledge continuity in real operation.
 
-### Basic Usage
+The following issues were observed:
 
-- Copy `_common/Project_MANIFEST.template.txt`
-- Save it as `ProjectX_MANIFEST.txt` for each project
-- In `[KNOWLEDGES]`, list only:
-  - `merged.md`
-  - The minimum required summary files
-- `[HISTORY]` is for record-keeping and is not used in normal restore or merge
+- Content tends to be summarized, losing important assumptions and decisions
+- Artifacts (documents, designs, code) are not preserved in full
+- It becomes difficult to trace why a specific conclusion was reached
+
+This workflow instead relies on **pasting file URLs into the prompt**, so that Copilot recognizes them as attachments.  
+This allows assumptions and artifacts to be restored **in their original form**.
 
 ---
 
-## Operational Flow (Verified)
+## MANIFEST Concept
 
-The following loop has been **verified in real operation**:
+- The MANIFEST explicitly declares **what Copilot is allowed to read**
+- It prevents Copilot from misinterpreting which files are authoritative
+- Any file not listed in the MANIFEST must not be treated as an assumption
 
-- rescue → rescue → backup → merge → restore
-- After restore, continue discussion and repeat backup → merge → restore
-- This loop does not cause unbounded growth or structural breakage
+### When to Update the MANIFEST
+
+The MANIFEST is **not a file inventory**.  
+It is a set of file URLs that are pasted into Copilot.
+
+Update the MANIFEST in the following cases:
+
+- When `merged.md` is updated by a merge
+- When the summary files referenced during restore change
+- When old summaries should no longer be referenced
+
+In normal operation:
+
+- `[KNOWLEDGES]` contains the latest `merged.md` and the minimum required summaries
+- `[HISTORY]` contains past references for record-keeping only
+
+---
+
+## Operational Flow Overview
+
+This workflow consists of the following four steps, executed depending on the situation:
+
+- rescue
+- backup
+- merge
+- restore
 
 ---
 
 ## Step 1: rescue (Emergency Recovery)
 
-### Purpose
-- Recover assumptions and **primary artifacts** after chat limits are reached
+### When to run
+- When the chat has already reached the limit, or immediately after
 
-### What to Use
+### Purpose
+- Recover assumptions and artifacts from a conversation that can no longer continue due to chat limits
+
+### What to use
 - `knowledge_rescue_prompt.txt`
 - Screenshots of the chat content
 
 ### Rules
 - Do not add new content
 - Do not guess or generalize
-- Record primary artifacts **verbatim**
-- Limit supporting context to what is necessary
+- Clearly mark unknown information
+- Record artifacts **verbatim**
 
 ---
 
 ## Step 2: backup (Normal Preservation)
 
-### Purpose
-- Preserve the **latest primary artifacts** before reaching chat limits
+### When to run
+- When discussions become long and assumptions or artifacts start to accumulate
+- Before reaching the chat limit
 
-### What to Use
+### Purpose
+- Preserve the **latest assumptions and artifacts** safely
+
+### What to use
 - `knowledge_backup_prompt.txt`
 
-### Output Includes
-- Primary artifacts (authoritative candidates)
-- Minimum supporting assumptions needed to understand them
+### Output includes
+- Assumptions (decisions, constraints, open issues)
+- **Artifact section**
+  - Documents
+  - Designs
+  - Program code
 
 ### Rules
-- Do not summarize or edit primary artifacts
-- Wrap the entire output with sufficiently long backticks
-  if Markdown or code blocks are included
+- Do not summarize artifacts
+- Preserve original content exactly
+- If Markdown or code blocks are included, **wrap the entire output with sufficiently long backticks**
 - Backup documents themselves are not treated as artifacts
 
 ---
 
-## Step 3: merge (Finalize Authoritative State)
+## Step 3: merge (Update the Authoritative File)
+
+### When to run
+- After new artifacts are created via backup or rescue
+- When the authoritative file should be updated
 
 ### Purpose
-- Create or update the authoritative state
-  by integrating multiple backups or rescues
+- Create or update the authoritative `merged.md` from backups or rescued content
 
-### What to Use
+### What to use
 - `knowledge_merge_prompt.txt`
 - `[KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
 
 ### Rules
 - Output a verification log first
 - Then output the copy-ready `merged.md`
-- Only primary artifacts are treated as authoritative
+- Treat artifacts as authoritative
 - Move older `merged.md` files into `history/`
 
 ---
 
-## Step 4: restore (Assumption Restoration Only)
+## Step 4: restore (Restore Assumptions Only)
+
+### When to run
+- When starting a new chat to continue past discussions
 
 ### Purpose
-- Restore **assumptions only**, in order to restart discussion safely
+- Restore **assumptions only** to restart discussion safely
 
-### What to Use
+### What to use
 - `knowledge_restore_prompt.txt`
 - `[KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
 
@@ -180,7 +212,7 @@ The following loop has been **verified in real operation**:
 - Focus only on restoring assumptions
 - Do not reprint artifacts
 - Show **artifact metadata only** (existence, type, role)
-- After restoration, resume normal discussion freely
+- After restoration, resume normal discussion
 
 ---
 
@@ -188,8 +220,8 @@ The following loop has been **verified in real operation**:
 
 - During merge and restore:
   - `merged.md`
-  - Minimum required summary files
-- `history/` is for humans only and is not passed to Copilot
+  - The minimum required summary files
+- `history/` is for human reference only and is not passed to Copilot
 
 ---
 
@@ -199,7 +231,4 @@ The most important goal of this workflow is:
 
 > **To restore assumptions safely without causing artifact duplication or growth**
 
-Primary artifacts are preserved through backup and merge,
-while restore is strictly limited to preparing a safe restart point.
-
-This separation keeps long-term operation stable and predictable.
+By separating backup/merge (preservation) from restore (restart), long-term operation remains stable and predictable.
