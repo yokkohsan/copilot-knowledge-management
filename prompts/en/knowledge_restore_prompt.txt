@@ -16,6 +16,7 @@ Do not start new discussion here.
 - Do not infer or generalize
 - Do not reprint primary artifacts
 - Do not modify restored assumptions
+- Do not perform reconciliation or integration of differences
 - After restoration is complete, normal discussion may resume freely
   and other sources (Teams, OneDrive, SharePoint, email, etc.) may be referenced
 

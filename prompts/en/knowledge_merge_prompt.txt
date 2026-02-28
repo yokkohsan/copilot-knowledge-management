@@ -20,6 +20,7 @@ No new discussion or analysis is needed.
 - If merged.md is available, treat it as the base
 - If not, prioritize newer summary files
 - Do not compress or delete information
+- If multiple versions of substantially the same artifact exist, treat the latest as authoritative, and do not delete older versions; clearly distinguish them instead
 
 [Output policy]
 - Output must have two sections:
