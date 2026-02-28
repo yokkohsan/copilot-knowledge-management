@@ -45,6 +45,21 @@ This repository itself is **not** a working directory.
 
 ---
 
+## About Copilot environments
+
+This workflow is designed to work reliably in Microsoft 365 environments, especially when using Teams Copilot where cross-source access (Teams chats, SharePoint, organization-managed OneDrive, etc.) is required.
+
+In some scenarios, using Copilot CLI or a local agent may be more suitable, for example:
+
+- Complex code design or large-scale refactoring
+- Changes that span an entire repository
+- Tasks that require running tests or static analysis
+- Long-term development of local artifacts in a structured project
+
+In such cases, CLI-based workflows can complement this model. However, the core principles of artifact-first management and explicit reference control remain the same.
+
+---
+
 ## Repository layout (GitHub)
 
 ```text
