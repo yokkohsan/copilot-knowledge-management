@@ -77,18 +77,19 @@ Copilot_Knowledge/
 
 ---
 
-## Why We Do Not Use Notebooks or Folder References
+## Why We Do Not Use Notebooks or Folder References as the Authoritative Store
 
-Copilot Notebooks and folder-based references were evaluated, but they did not work well for long-term knowledge continuity in real operation.
+Copilot Notebooks and folder-based references can be useful as temporary working spaces or supporting reference containers.  
+However, this workflow does not use them as the authoritative store for assumptions or artifacts.
 
-The following issues were observed:
+In real operation, the following issues may occur:
 
-- Content tends to be summarized, losing important assumptions and decisions
-- Artifacts (documents, designs, code) are not preserved in full
-- It becomes difficult to trace why a specific conclusion was reached
+- Content may be summarized, losing important assumptions and decisions
+- Artifacts (documents, designs, code) may not be preserved in full
+- It may become difficult to trace why a specific conclusion was reached
+- The accessible scope and reference priority may differ depending on the UI or environment
 
-This workflow instead relies on **pasting file URLs into the prompt**, so that Copilot recognizes them as attachments.  
-This allows assumptions and artifacts to be restored **in their original form**.
+This workflow instead relies on pasting file URLs into the prompt and using only the files that Copilot can recognize as references or attachment-equivalent inputs. If any URL cannot be referenced, Copilot must not guess and must treat it as "not referenced".
 
 ---
 
@@ -190,9 +191,9 @@ This workflow consists of the following four steps, executed depending on the si
 - `[ACTIVE_KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
 
 ### Rules
-- Output a verification log first
+- Output a verification log for both referenced and unreferenced files first
 - Then output the copy-ready `merged.md`
-- Treat artifacts as authoritative
+- Include only primary artifacts in the authoritative file
 - Move older `merged.md` files into `history/`
 
 ---
@@ -214,16 +215,17 @@ This workflow consists of the following four steps, executed depending on the si
 - Focus only on restoring assumptions
 - Do not reprint artifacts
 - Show **artifact metadata only** (existence, type, role)
+- Do not use `[HISTORY]` for assumption restoration unless it is explicitly needed
 - After restoration, resume normal discussion
 
 ---
 
 ## What Copilot Is Allowed to See
 
-- During merge and restore:
+- During normal merge and restore:
   - `merged.md`
   - The minimum required summary files
-- `history/` is for human reference only and is not passed to Copilot
+- `history/` is for human reference only and is not normally passed to Copilot
 
 ---
 
@@ -233,4 +235,4 @@ The most important goal of this workflow is:
 
 > **To restore assumptions safely without causing artifact duplication or growth**
 
-By separating backup/merge (preservation) from restore (restart), long-term operation remains stable and predictable.
+By separating backup / merge (preservation) from restore (restart), long-term operation remains stable and predictable.

@@ -1,63 +1,97 @@
-(Validation status: not started)
-
-[How to use]
-
-1) Paste the entire [ACTIVE_KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top.
+[How to use – read first]
+1) Paste the entire [ACTIVE_KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top of this prompt.
+   - [ACTIVE_KNOWLEDGES] usually contains the currently active merged.md and, if needed, summary files for difference checking.
    - Do not paste [HISTORY] unless explicitly instructed.
-2) Paste the file URLs so that Copilot recognizes them as references or attachment-equivalent inputs.
+2) If the pasted URLs are recognized as references or attachment-equivalent inputs, use their contents for this operation. If any URL cannot be referenced, do not guess; treat it as "not referenced".
 
 ---
 
-Use only the files listed in [ACTIVE_KNOWLEDGES].
-Do not use files listed in [HISTORY] unless explicitly instructed.
+Use only the files listed in [ACTIVE_KNOWLEDGES] to restore the assumptions for this project and resume discussion in this chat.
+Do not use files listed in [HISTORY] for assumption restoration unless explicitly instructed.
 
-This prompt is used only for the **assumption restoration phase**.
-Do not start new discussion here.
+This prompt is used only for the **knowledge restoration (assumption restoration) phase**.
+Do not start new discussion or additional analysis at this point.
 
 [Important constraints]
-- During restoration, use only attached information
-- Do not add new content
-- Do not infer or generalize
-- Do not reprint primary artifacts
-- Do not modify restored assumptions
-- Do not perform reconciliation or integration of differences
-- After restoration is complete, normal discussion may resume freely
-  and other sources (Teams, OneDrive, SharePoint, email, etc.) may be referenced
+- After the restoration phase is complete, the normal discussion phase may freely reference other information sources, such as Teams, OneDrive, SharePoint, and email
+- The following constraints apply only during the assumption restoration phase:
+  - Use only information that can be referenced
+  - Do not add any new content
+  - Do not guess, infer, or generalize
+- Do not rewrite or restructure content in a way that changes the meaning, and preserve the wording used in the source documents and artifacts
+- Preserve artifacts contained in summary / merged files, such as documents, plans, designs, and program code, exactly as written
+- If merged.md can be referenced:
+  - Treat it as the current authoritative base
+  - Treat summary files, where larger sequence numbers indicate newer knowledge, as differences added after merged.md
+- If merged.md cannot be referenced:
+  - Prioritize summary files by recency, where larger sequence numbers indicate newer knowledge
+- Do not compress or delete information too aggressively on your own
+- If a file cannot be referenced, do not guess; explicitly mark it as "not referenced"
+- Accuracy is the highest priority
+- If there is a conflict, always prioritize the content with the newer sequence number; do not reconcile or merge differences during restore
+- Restore only restates assumptions, and does not save artifacts, create an authoritative file, or restructure content
+- Do not modify restored assumptions unless explicitly instructed
 
 [Output policy]
-- Output must have two parts (no Markdown code blocks):
-  1) Restoration log
-  2) Restored assumptions
+- Output must have exactly two parts:
+  1) Reference log (outside code blocks)
+  2) Restored assumptions (outside code blocks)
+- Do not start directly with conclusions, discussion, or suggestions
+- Do not use Markdown code blocks, because restore is only for reading and presenting assumptions
 
 [Output format]
 
 # Reference Log (Restore)
 
 ## 1. Files successfully referenced
-- List merged / summary files
+- List referenced summary / merged files
 
 ## 2. Files not referenced (if any)
-- File:
+- File name or identifier:
   - URL:
   - Reason:
 
 ## 3. Restoration decision notes
-- Base file:
-- Applied summaries:
-- Conflict handling:
+- Base file used:
+- Summary files applied as differences:
+- Conflict handling rules:
+- Invalidated or excluded assumptions / conclusions, and reasons:
 
----
+(Separate the following section with ---)
 
 # Restored Assumptions
 
 ## 1. Purpose of the conversation
-## 2. Assumptions and constraints
-## 3. Decisions and conclusions
-## 4. Open issues
-## 5. Referenced materials
-## 6. Artifact list (metadata only)
-- List artifact name, type, and role only
-- Do not reprint artifact content
+Describe in prose.
 
-After this output, restoration is complete.
-Continue with normal discussion.
+## 2. Assumptions and constraints
+Describe as needed.
+
+## 3. Decisions and conclusions reached
+Describe as needed.
+
+## 4. Open issues and pending items
+- If none apply, explicitly write "none".
+
+## 5. Referenced materials
+- File name:
+  - Type:
+  - Storage location:
+  - Reference URL: (only if available)
+  - Role in the conversation:
+
+## 6. Artifact list (metadata only)
+- In this section, list only the type, name, and role of currently valid primary artifacts
+- Do not reprint artifact content during restore; the authoritative content remains in merged.md or summary files
+- If multiple artifacts exist, list them clearly
+- If no clear primary artifacts exist, write "none"
+
+(Example)
+- Artifact 1: Design document for the ○○ feature (authoritative source: merged.md)
+- Artifact 2: Code for the △△ module (difference source: summary_3.md)
+
+After assumption restoration is complete, normal discussion, idea development, artifact refinement, and references to other information sources such as Teams, OneDrive, SharePoint, and email may resume.
+
+---
+
+(This is the end of assumption restoration. After reviewing this output, enter the topic you want to continue discussing.)

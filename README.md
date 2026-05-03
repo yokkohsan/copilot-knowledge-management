@@ -38,10 +38,14 @@ This repository is a **distribution package**.
 
 It provides:
 - Prompt templates (rescue / backup / merge / restore)
-- A MANIFEST template to explicitly declare what Copilot is allowed to read
+- A MANIFEST template that lists active knowledge URLs under `[ACTIVE_KNOWLEDGES]`
 - Documents that explain the operational ideas and rules
 
 This repository itself is **not** a working directory.
+
+This repository is mainly for Microsoft 365 Copilot knowledge continuity. It is not a replacement for GitHub Copilot repository instructions such as `.github/copilot-instructions.md`, `AGENTS.md`, or prompt files.
+
+本リポジトリは、主に Microsoft 365 Copilot での知識継承を目的としています。GitHub Copilot のリポジトリ指示ファイル（`.github/copilot-instructions.md`、`AGENTS.md`、prompt files など）を置き換えるものではありません。
 
 ---
 
@@ -104,6 +108,8 @@ More advanced or convenient layouts are described in the documentation under `do
 ## How to use
 
 Copy the required prompt files and the MANIFEST template from this repository into your own working directory (OneDrive / SharePoint), and work there with Copilot.
+
+In actual use, paste only the `[ACTIVE_KNOWLEDGES]` URLs from the MANIFEST into Copilot, and let Copilot report any URL it cannot reference.
 
 ---
 
