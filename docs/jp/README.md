@@ -110,10 +110,12 @@ MANIFEST は「ファイル管理台帳」ではなく、Copilot に貼り付け
 
 通常は、
 
-- `[KNOWLEDGES]` に最新の `merged.md` と必要最小限の summary
+- `[ACTIVE_KNOWLEDGES]` に最新の `merged.md` と必要最小限の summary
 - `[HISTORY]` に過去の参照履歴
 
 のみを記載します。
+
+通常の merge / restore では、`[ACTIVE_KNOWLEDGES]` の URL だけを Copilot に貼り付けます。`[HISTORY]` は、明示的に必要な場合を除き Copilot に渡しません。
 
 ---
 
@@ -186,7 +188,7 @@ MANIFEST は「ファイル管理台帳」ではなく、Copilot に貼り付け
 
 ### 使用するもの
 - `knowledge_merge_prompt.txt`
-- `ProjectX_MANIFEST.txt` の `[KNOWLEDGES]`
+- `ProjectX_MANIFEST.txt` の `[ACTIVE_KNOWLEDGES]`
 
 ### ルール
 - 参照した前提知識・成果物の **確認ログ** を先に出力します
@@ -206,7 +208,7 @@ MANIFEST は「ファイル管理台帳」ではなく、Copilot に貼り付け
 
 ### 使用するもの
 - `knowledge_restore_prompt.txt`
-- `ProjectX_MANIFEST.txt` の `[KNOWLEDGES]`
+- `ProjectX_MANIFEST.txt` の `[ACTIVE_KNOWLEDGES]`
 
 ### ルール
 - 新しい結論を出しません

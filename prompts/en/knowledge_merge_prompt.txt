@@ -2,13 +2,15 @@
 
 [How to use]
 
-1) Paste the entire [KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top of this prompt.
-2) Ensure the referenced files are attached and readable.
+1) Paste the entire [ACTIVE_KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top of this prompt.
+   - Do not paste [HISTORY] unless explicitly instructed.
+2) Paste the file URLs so that Copilot recognizes them as references or attachment-equivalent inputs.
 
 ---
 
 You are merging knowledge for the same project.
-Use only the files listed in [KNOWLEDGES].
+Use only the files listed in [ACTIVE_KNOWLEDGES].
+Do not use files listed in [HISTORY] unless explicitly instructed.
 
 No new discussion or analysis is needed.
 

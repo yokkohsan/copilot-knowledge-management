@@ -2,10 +2,14 @@
 
 [How to use]
 
-1) Paste the entire [KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top.
-2) Ensure referenced files are attached and readable.
+1) Paste the entire [ACTIVE_KNOWLEDGES] block from ProjectX_MANIFEST.txt at the top.
+   - Do not paste [HISTORY] unless explicitly instructed.
+2) Paste the file URLs so that Copilot recognizes them as references or attachment-equivalent inputs.
 
 ---
+
+Use only the files listed in [ACTIVE_KNOWLEDGES].
+Do not use files listed in [HISTORY] unless explicitly instructed.
 
 This prompt is used only for the **assumption restoration phase**.
 Do not start new discussion here.

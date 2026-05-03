@@ -111,8 +111,10 @@ Update the MANIFEST in the following cases:
 
 In normal operation:
 
-- `[KNOWLEDGES]` contains the latest `merged.md` and the minimum required summaries
+- `[ACTIVE_KNOWLEDGES]` contains the latest `merged.md` and the minimum required summaries
 - `[HISTORY]` contains past references for record-keeping only
+
+During normal merge / restore operations, paste only the URLs in `[ACTIVE_KNOWLEDGES]` into Copilot. Do not pass `[HISTORY]` to Copilot unless it is explicitly needed.
 
 ---
 
@@ -185,7 +187,7 @@ This workflow consists of the following four steps, executed depending on the si
 
 ### What to use
 - `knowledge_merge_prompt.txt`
-- `[KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
+- `[ACTIVE_KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
 
 ### Rules
 - Output a verification log first
@@ -205,7 +207,7 @@ This workflow consists of the following four steps, executed depending on the si
 
 ### What to use
 - `knowledge_restore_prompt.txt`
-- `[KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
+- `[ACTIVE_KNOWLEDGES]` section of `ProjectX_MANIFEST.txt`
 
 ### Rules
 - Do not produce new conclusions

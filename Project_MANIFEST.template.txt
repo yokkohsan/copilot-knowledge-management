@@ -1,4 +1,4 @@
-[KNOWLEDGES]
+[ACTIVE_KNOWLEDGES]
 https://org.sharepoint.com/sites/.../merged.md
 https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_4.md
 https://org.sharepoint.com/sites/.../ProjectX_YYYYMMDD_summary_5.md
